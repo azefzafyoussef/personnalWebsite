@@ -68,7 +68,10 @@
                 @endif
 
                 <!-- Content -->
-                <div class="prose max-w-none mb-8">
+                <button id="read-btn" class="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                    🔊 Read Aloud
+                </button>
+                <div class="prose max-w-none mb-8" id="article-content">
                     {!! $post->content !!}
                 </div>
 
@@ -274,6 +277,42 @@
                 }
             });
         }
+        });
+    document.addEventListener('DOMContentLoaded', function () {
+
+        const readBtn = document.getElementById('read-btn');
+        const content = document.getElementById('article-content');
+                console.log("click")
+
+        if (readBtn && content) {
+            let isReading = false;
+            let utterance = null;
+
+            readBtn.addEventListener('click', function () {
+                console.log("click")
+                if (!isReading) {
+                    const text = content.innerText;
+                    utterance = new SpeechSynthesisUtterance(text);
+                    utterance.lang = 'en-US'; // or 'fr-FR', 'ar-SA', etc.
+                    utterance.rate = 1;       // speed
+                    utterance.pitch = 1;      // voice tone
+
+                    speechSynthesis.speak(utterance);
+                    isReading = true;
+                    readBtn.textContent = '⏹ Stop Reading';
+
+                    utterance.onend = function () {
+                        isReading = false;
+                        readBtn.textContent = '🔊 Read Aloud';
+                    };
+                } else {
+                    speechSynthesis.cancel();
+                    isReading = false;
+                    readBtn.textContent = '🔊 Read Aloud';
+                }
+            });
+        }
     });
+
 </script>
 @endsection

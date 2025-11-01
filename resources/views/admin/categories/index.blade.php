@@ -57,9 +57,9 @@
                             <a href="{{ route('admin.categories.edit', $category) }}" class="text-blue-600 hover:text-blue-900">
                                 <i class="fas fa-edit"></i>
                             </a>
-                            <a href="{{ route('admin.categories.toggle', $category) }}" class="text-orange-600 hover:text-orange-900">
+                            {{-- <a href="{{ route('admin.categories.toggle', $category) }}" class="text-orange-600 hover:text-orange-900">
                                 <i class="fas fa-power-off"></i>
-                            </a>
+                            </a> --}}
                             <form action="{{ route('admin.categories.destroy', $category) }}" method="POST" class="inline">
                                 @csrf
                                 @method('DELETE')
@@ -74,7 +74,7 @@
             </tbody>
         </table>
     </div>
-    
+
     <div class="px-6 py-4 border-t border-gray-200">
         {{ $categories->links() }}
     </div>

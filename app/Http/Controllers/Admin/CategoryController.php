@@ -43,10 +43,16 @@ class CategoryController extends Controller
 
     public function edit(Category $category)
     {
+
         return view('admin.categories.edit', compact('category'));
     }
 
-    public function update(Request $request, Category $category)
+    public function toggle(Category $category)
+    {
+        return view('admin.categories.toggle', compact('category'));
+    }
+
+    public function update(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255',
@@ -54,7 +60,7 @@ class CategoryController extends Controller
             'color' => 'nullable|string',
             'icon' => 'nullable|string'
         ]);
-
+        $category = Category::Find($request->id);
         $category->update([
             'name' => $request->name,
             'slug' => Str::slug($request->name),
@@ -73,4 +79,24 @@ class CategoryController extends Controller
         return redirect()->route('admin.categories.index')
             ->with('success', 'Category deleted successfully.');
     }
+
+
+    public function ckeditorUpload(Request $request)
+    {
+        if ($request->hasFile('upload')) {
+            $file = $request->file('upload');
+            $fileName = time().'_'.$file->getClientOriginalName();
+            $file->storeAs('uploads', $fileName, 'public');
+
+            $url = asset('storage/uploads/' . $fileName);
+
+            return response()->json([
+                'uploaded' => true,
+                'url' => $url
+            ]);
+        }
+    }
+
+
+
 }

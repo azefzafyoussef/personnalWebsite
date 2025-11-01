@@ -68,9 +68,9 @@
                             <a href="{{ route('admin.posts.edit', $post) }}" class="text-blue-600 hover:text-blue-900">
                                 <i class="fas fa-edit"></i>
                             </a>
-                            <a href="{{ route('admin.posts.toggle', $post) }}" class="text-orange-600 hover:text-orange-900">
+                            {{-- <a href="{{ route('admin.posts.toggle', $post) }}" class="text-orange-600 hover:text-orange-900">
                                 <i class="fas fa-power-off"></i>
-                            </a>
+                            </a> --}}
                             @if($post->file_path)
                             <a href="{{ route('admin.posts.download', $post) }}" class="text-purple-600 hover:text-purple-900">
                                 <i class="fas fa-download"></i>
@@ -90,7 +90,7 @@
             </tbody>
         </table>
     </div>
-    
+
     <div class="px-6 py-4 border-t border-gray-200">
         {{ $posts->links() }}
     </div>

@@ -22,11 +22,11 @@ Route::middleware('guest')->group(function () {
     // Login Routes
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [LoginController::class, 'login']);
-    
+
     // Register Routes
     Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
     Route::post('/register', [RegisterController::class, 'register']);
-    
+
     // Forgot Password Routes (optional)
     Route::get('/password/reset', [App\Http\Controllers\Auth\ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
     Route::post('/password/email', [App\Http\Controllers\Auth\ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
@@ -38,12 +38,29 @@ Route::middleware('guest')->group(function () {
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // Admin routes
-Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
-    Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
-    
-    // Category routes
-    Route::resource('categories', App\Http\Controllers\Admin\CategoryController::class);
-    
-    // Post routes
-    Route::resource('posts', App\Http\Controllers\Admin\PostController::class);
-});
+// Route::prefix('admin')->name('admin.')->middleware(['auth', 'App\Http\Middleware\AdminMiddleware'])->group(function () {
+//     Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
+
+//     // Category routes
+//     Route::resource('categories', App\Http\Controllers\Admin\CategoryController::class)->except(['show']);
+//     // Route::put('/edit-categ/{category}', [App\Http\Controllers\Admin\CategoryController::class,"update"])->name('categories.test');
+//     // Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
+
+//     // Post routes
+//     Route::resource('posts', App\Http\Controllers\Admin\PostController::class);
+// });
+
+
+Route::prefix('admin')
+    ->name('admin.')
+    ->middleware(['auth', 'App\Http\Middleware\AdminMiddleware'])
+    ->group(function () {
+        Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
+        Route::resource('categories', \App\Http\Controllers\Admin\CategoryController::class)->except(['show']);
+        Route::post('/edit-category', [App\Http\Controllers\Admin\CategoryController::class,"update"])->name('categories.edit.post');
+        Route::post('/ckeditor/upload', [App\Http\Controllers\Admin\CategoryController::class, 'ckeditorUpload'])->name('ckeditor.upload');
+        Route::resource('posts', \App\Http\Controllers\Admin\PostController::class);
+        Route::post('/edit-post', [App\Http\Controllers\Admin\PostController::class,"update"])->name('posts.edit.post');
+
+    });
+
