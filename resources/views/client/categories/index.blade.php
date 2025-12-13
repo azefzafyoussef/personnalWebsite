@@ -3,7 +3,7 @@
 @section('title', 'Categories - NotesHub')
 
 @section('content')
-<div class="bg-gray-50">
+<div class="bg-gray-150">
     <!-- Header -->
     <div class="bg-white border-b">
         <div class="container mx-auto px-4 py-4">
@@ -19,7 +19,7 @@
     <div class="container mx-auto px-4 py-8">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             @foreach($categories as $category)
-            <a href="{{ route('categories.show', $category) }}" 
+            <a href="{{ route('categories.show', $category) }}"
                class="category-card bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow duration-300">
                 <div class="flex items-center space-x-4">
                     <div class="w-12 h-12 rounded-lg flex items-center justify-center" style="background-color: {{ $category->color }}20;">

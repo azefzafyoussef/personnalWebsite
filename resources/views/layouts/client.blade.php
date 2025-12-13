@@ -26,19 +26,19 @@
                         <div class="flex items-center space-x-4">
                             <span class="text-gray-600">Bienvenue, <strong>{{ auth()->user()->name }}</strong></span>
                             <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse" title="En ligne"></div>
-                            
+
                             @if(auth()->user()->is_admin)
                                 <a href="{{ route('admin.dashboard') }}" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 font-medium flex items-center space-x-2">
                                     <i class="fas fa-cog"></i>
                                     <span>Admin</span>
                                 </a>
                             @endif
-                            
+
                             <a href="{{ route('posts.bookmarks') }}" class="text-gray-600 hover:text-blue-600 font-medium flex items-center space-x-1">
                                 <i class="far fa-bookmark"></i>
                                 <span>Favoris</span>
                             </a>
-                            
+
                             <form method="POST" action="{{ route('logout') }}" class="inline">
                                 @csrf
                                 <button type="submit" class="text-gray-600 hover:text-red-600 font-medium flex items-center space-x-1">

@@ -46,4 +46,14 @@ class HomeController extends Controller
             'totalDownloads'
         ));
     }
+
+            /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function aboutMe()
+    {
+        return view('client.about-me');
+    }
 }

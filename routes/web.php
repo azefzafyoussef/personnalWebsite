@@ -6,9 +6,11 @@ use App\Http\Controllers\Client\PostController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 // Public routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/aboutMe', [HomeController::class, 'aboutMe'])->name('about');
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
 Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
 Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
@@ -61,6 +63,46 @@ Route::prefix('admin')
         Route::post('/ckeditor/upload', [App\Http\Controllers\Admin\CategoryController::class, 'ckeditorUpload'])->name('ckeditor.upload');
         Route::resource('posts', \App\Http\Controllers\Admin\PostController::class);
         Route::post('/edit-post', [App\Http\Controllers\Admin\PostController::class,"update"])->name('posts.edit.post');
+        Route::get('/posts/{post}/download', [App\Http\Controllers\Admin\PostController::class, 'download'])->name('posts.download');
 
     });
 
+// Route::get('/set-locale/{locale}', function ($locale) {
+//     if (in_array($locale, ['en', 'fr', 'ar'])) {
+//         session()->put('locale', $locale);
+//         app()->setLocale($locale);
+//     }
+//     return redirect()->back();
+// })->name('locale.setting');
+
+// routes/web.php
+Route::post('/locale', function (Request $request) {
+    $request->validate([
+        'locale' => 'required|in:en,fr,ar'
+    ]);
+
+    session()->put('locale', $request->locale);
+
+    app()->setLocale($request->locale);
+
+    return redirect()->back();
+})->name('locale.setting');
+
+
+// routes/web.php (add this temporarily)
+Route::get('/test-session', function() {
+    $data = [
+        'session_id' => session()->getId(),
+        'session_locale' => session('locale', 'NOT SET'),
+        'app_locale' => app()->getLocale(),
+        'all_session_data' => session()->all(),
+        'cookies' => request()->cookie(),
+        'session_driver' => config('session.driver'),
+        'session_lifetime' => config('session.lifetime'),
+    ];
+
+    // Also try to set locale manually
+    session()->put('test_key', 'test_value_' . time());
+
+    return response()->json($data);
+});

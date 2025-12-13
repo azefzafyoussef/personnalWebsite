@@ -79,28 +79,38 @@ class PostController extends Controller
         return view('client.posts.show', compact('post', 'relatedPosts'));
     }
 
-    public function download(Post $post)
-    {
-        // Check if post is published
-        if (!$post->is_published) {
-            abort(404);
-        }
+    // public function download(Post $post)
+    // {
+    //     // Check if post is published
+    //     if (!$post->is_published) {
+    //         abort(404);
+    //     }
 
-        if (!$post->file_path) {
-            return redirect()->back()->with('error', 'No file available for download.');
-        }
+    //     if (!$post->file_path) {
+    //         return redirect()->back()->with('error', 'No file available for download.');
+    //     }
 
-        // Increment download count
-        $post->increment('downloads');
+    //     // Increment download count
+    //     $post->increment('downloads');
 
-        return Storage::disk('public')->download($post->file_path);
+    //     return Storage::disk('public')->download($post->file_path);
+    // }
+
+        public function download(Post $post)
+{
+    if (!$post->file_path || !Storage::disk('public')->exists($post->file_path)) {
+        return redirect()->back()->with('error', 'File not found.');
     }
+
+    return Storage::disk('public')->download($post->file_path);
+}
+
 
     public function bookmark(Request $request, Post $post)
     {
         // Simple bookmark functionality (you can extend this with a bookmarks table)
         $bookmarks = $request->session()->get('bookmarks', []);
-        
+
         if (in_array($post->id, $bookmarks)) {
             // Remove bookmark
             $bookmarks = array_diff($bookmarks, [$post->id]);
@@ -126,5 +136,6 @@ class PostController extends Controller
 
         return view('client.posts.bookmarks', compact('posts'));
     }
-    
+
+
 }

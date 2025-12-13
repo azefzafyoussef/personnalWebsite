@@ -4,32 +4,58 @@
 
 @section('content')
     <!-- Header -->
+    @php
+        $currentLocale = app()->getLocale();
+        $locales = [
+            'en' => ['name' => 'English', 'flag' => 'gb'],
+            'fr' => ['name' => 'Français', 'flag' => 'fr'],
+            'ar' => ['name' => 'العربية', 'flag' => 'sa', 'dir' => 'rtl'],
+        ];
+    @endphp
 
+<section class="bg-gray-900 text-gray-100 min-h-screen py-16">
+    <div class="container mx-auto px-4 max-w-4xl">
+        <h1 class="text-4xl font-bold mb-6 text-blue-500">{{__('index.about-me')}}</h1>
 
-
-    <!-- Hero Section -->
-<section class="gradient-bg text-white" style="padding-top:17rem; padding-bottom:17rem">
-    <div class="container mx-auto px-4 text-center">
-
-        <!-- Main Headline -->
-        <h1 class="text-5xl font-bold mb-6">
-            A space to share what I learn, one small insight at a time
-        </h1>
-
-        <!-- Subtext -->
-        <p class="text-xl mb-8 max-w-2xl mx-auto text-gray-200">
-            This is where I document experiments, discoveries, and ideas from my journey in technology, coding, and security. Bite-sized knowledge for curious minds, ready to explore, learn, and grow.
+        <p class="mb-6 text-lg">
+            Hello! I'm <strong>AZEFZAF YOUSSEF</strong>, a Junior Pentester and Cybersecurity Engineer based in France.
+            I specialize in penetration testing, vulnerability research, and offensive automation. I’m passionate about securing applications, systems, and networks while constantly learning the latest attack techniques.
         </p>
 
-        <!-- Call-to-Action -->
-        <div class="flex justify-center space-x-4">
-            <a href="{{ route('posts.index') }}" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition duration-300">
-                Start Exploring
-            </a>
-        </div>
+        <h2 class="text-2xl font-semibold mt-8 mb-4 text-blue-400">Professional Skills</h2>
+        <ul class="list-disc list-inside space-y-2">
+            <li>Web, API, Mobile, Windows, Active Directory & Linux penetration testing</li>
+            <li>Privilege escalation, lateral movement, persistence, pivoting</li>
+            <li>Vulnerability research, fuzzing, PoC exploit development</li>
+            <li>Tools: Burp Suite, Metasploit, BloodHound, Mimikatz, sqlmap, nmap</li>
+            <li>Programming & Scripting: Python, Bash</li>
+            <li>Technologies: Docker, Splunk, MySQL, Oracle</li>
+        </ul>
 
+        <h2 class="text-2xl font-semibold mt-8 mb-4 text-blue-400">Experience & Projects</h2>
+        <p class="mb-4">
+            I have hands-on experience in both professional and lab environments:
+        </p>
+        <ul class="list-disc list-inside space-y-2">
+            <li>Internship — Researching 0-day vulnerabilities and penetration testing at Fenrisk (Paris)</li>
+            <li>Fullstack Developer (PHP/Laravel) — E-sol, Casablanca</li>
+            <li>CTF challenges: Root-Me, Hack The Box, TryHackMe</li>
+            <li>Server & web audits, security tool development, automated attack chains</li>
+        </ul>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4 text-blue-400">Languages & Interests</h2>
+        <p class="mb-4">
+            Fluent in French and English, native Arabic speaker. My passions include cybersecurity, CTF competitions, tool development, and sports.
+        </p>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-4 text-blue-400">Contact Me</h2>
+        <p class="mb-4">
+            📧 <a href="mailto:azefzafyossef@gmail.com" class="text-blue-500 underline">azefzafyossef@gmail.com</a> <br>
+            🔗 <a href="#" class="text-blue-500 underline">GitHub / LinkedIn / CTF Profiles</a>
+        </p>
     </div>
 </section>
+
 
 
 

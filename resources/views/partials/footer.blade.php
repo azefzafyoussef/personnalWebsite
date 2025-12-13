@@ -5,7 +5,7 @@
             <div>
                 <div class="flex items-center space-x-3 mb-4">
                     <i class="fas fa-book text-2xl text-blue-400"></i>
-                    <span class="text-xl font-bold">NotesHub</span>
+                    <span class="text-xl font-bold">isFake</span>
                 </div>
                 <p class="text-gray-400">
                     Share knowledge, learn together. A platform for students and educators to share study materials.
