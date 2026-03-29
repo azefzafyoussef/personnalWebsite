@@ -4,8 +4,8 @@
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
                 <div class="flex items-center space-x-3 mb-4">
-                    <i class="fas fa-book text-2xl text-blue-400"></i>
-                    <span class="text-xl font-bold">isFake</span>
+                    <i class="fas p-2 fa-book text-2xl text-blue-400"></i>
+                    <span class="text-xl font-bold">{{__("index.website-name")}}</span>
                 </div>
                 <p class="text-gray-400">
                     Share knowledge, learn together. A platform for students and educators to share study materials.
@@ -28,7 +28,9 @@
                     @foreach(\App\Models\Category::where('is_active', true)->take(5)->get() as $category)
                     <li>
                         <a href="{{ route('categories.show', $category) }}" class="hover:text-white transition-colors flex items-center space-x-2">
-                            <i class="{{ $category->icon }} text-sm" style="color: {{ $category->color }};"></i>
+                            <i class="{{ $category->icon }} @if (app()->getLocale() == 'ar')
+                                                ml-2
+                                    @endif text-sm" style="color: {{ $category->color }};"></i>
                             <span>{{ $category->name }}</span>
                         </a>
                     </li>
@@ -60,7 +62,7 @@
             </div>
         </div>
         <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; {{ date('Y') }} NotesHub. All rights reserved.</p>
+            <p>&copy; {{ date('Y') }} Youssef.sec. All rights reserved.</p>
         </div>
     </div>
 </footer>

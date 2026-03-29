@@ -8,8 +8,8 @@
                 <!-- Logo -->
                 <div class="flex items-center space-x-3">
                     <a href="{{ route('home') }}" class="flex items-center space-x-3">
-                        <i class="fas fa-book text-2xl text-blue-600"></i>
-                        <span class="text-xl font-bold text-gray-800">NotesHub</span>
+                        <i class="fas p-2 fa-book text-2xl text-blue-600"></i>
+                        <span class="text-xl font-bold text-gray-800">Youssef.sec</span>
                     </a>
                 </div>
 
@@ -29,7 +29,7 @@
 
                             @if(auth()->user()->is_admin)
                                 <a href="{{ route('admin.dashboard') }}" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 font-medium flex items-center space-x-2">
-                                    <i class="fas fa-cog"></i>
+                                    <i class="fas p-2 fa-cog"></i>
                                     <span>Admin</span>
                                 </a>
                             @endif
@@ -42,7 +42,7 @@
                             <form method="POST" action="{{ route('logout') }}" class="inline">
                                 @csrf
                                 <button type="submit" class="text-gray-600 hover:text-red-600 font-medium flex items-center space-x-1">
-                                    <i class="fas fa-sign-out-alt"></i>
+                                    <i class="fas p-2 fa-sign-out-alt"></i>
                                     <span>Déconnexion</span>
                                 </button>
                             </form>

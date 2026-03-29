@@ -57,26 +57,26 @@ class PostController extends Controller
         return view('client.posts.index', compact('posts', 'categories', 'sort'));
     }
 
-    public function show(Post $post)
+    public function show()
     {
         // Check if post is published
-        if (!$post->is_published) {
-            abort(404);
-        }
+        // if (!$post->is_published) {
+        //     abort(404);
+        // }
 
         // Increment views
-        $post->increment('views');
+        // $post->increment('views');
 
-        $post->load(['category', 'user']);
-        $relatedPosts = Post::where('category_id', $post->category_id)
-            ->where('id', '!=', $post->id)
-            ->where('is_published', true)
-            ->with('user')
-            ->latest()
-            ->take(4)
-            ->get();
+        // $post->load(['category', 'user']);
+        // $relatedPosts = Post::where('category_id', $post->category_id)
+        //     ->where('id', '!=', $post->id)
+        //     ->where('is_published', true)
+        //     ->with('user')
+        //     ->latest()
+        //     ->take(4)
+        //     ->get();
 
-        return view('client.posts.show', compact('post', 'relatedPosts'));
+        return view('client.posts.cve', );
     }
 
     // public function download(Post $post)

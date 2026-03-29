@@ -1,6 +1,6 @@
 @extends('layouts.client')
 
-@section('title', 'NotesHub - Partagez Vos Connaissances')
+@section('title', 'Youssef.sec - Partagez Vos Connaissances')
 
 @section('main-content')
     <!-- Hero Section -->
@@ -12,7 +12,7 @@
                     <p class="text-blue-100">Content de vous revoir. Continuez à apprendre et partager !</p>
                 </div>
             @endauth
-            
+
             <h1 class="text-5xl font-bold mb-6">Partagez Vos Connaissances</h1>
             <p class="text-xl mb-8 max-w-2xl mx-auto">
                 Découvrez des milliers de notes sur divers sujets, ou contribuez en partageant vos propres supports d'étude.

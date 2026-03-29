@@ -1,6 +1,6 @@
 @extends('layouts.auth')
 
-@section('title', 'Login - NotesHub')
+@section('title', 'Login - Youssef.sec')
 @section('page-title', 'Welcome Back')
 @section('page-subtitle', 'Sign in to your account to continue')
 
@@ -11,13 +11,13 @@
         <!-- Email -->
         <div class="form-group">
             <label for="email" class="form-label">Email Address</label>
-            <input type="email" 
-                   id="email" 
-                   name="email" 
-                   value="{{ old('email') }}" 
-                   class="form-control @error('email') error @enderror" 
+            <input type="email"
+                   id="email"
+                   name="email"
+                   value="{{ old('email') }}"
+                   class="form-control @error('email') error @enderror"
                    placeholder="Enter your email"
-                   required 
+                   required
                    autofocus>
             @error('email')
                 <span class="form-error">{{ $message }}</span>
@@ -27,10 +27,10 @@
         <!-- Password -->
         <div class="form-group">
             <label for="password" class="form-label">Password</label>
-            <input type="password" 
-                   id="password" 
-                   name="password" 
-                   class="form-control @error('password') error @enderror" 
+            <input type="password"
+                   id="password"
+                   name="password"
+                   class="form-control @error('password') error @enderror"
                    placeholder="Enter your password"
                    required>
             @error('password')
@@ -53,7 +53,7 @@
 
         <!-- Submit Button -->
         <button type="submit" class="btn btn-primary">
-            <i class="fas fa-sign-in-alt"></i>
+            <i class="fas p-2 fa-sign-in-alt"></i>
             Sign In
         </button>
 
@@ -71,7 +71,7 @@
 
     <!-- Sign Up Link -->
     <div class="auth-links">
-        Don't have an account? 
+        Don't have an account?
         <a href="{{ route('register') }}" class="auth-link">Create one here</a>
     </div>
 @endsection
@@ -82,7 +82,7 @@
         // Add loading state to form submission
         const form = document.querySelector('form');
         const submitBtn = form.querySelector('button[type="submit"]');
-        
+
         form.addEventListener('submit', function() {
             submitBtn.classList.add('btn-loading');
             submitBtn.disabled = true;

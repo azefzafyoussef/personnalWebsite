@@ -1,4 +1,4 @@
-/* NotesHub Main Styles */
+/* Youssef.sec Main Styles */
 :root {
     --primary: #8b5cf6;
     --primary-dark: #7c3aed;
@@ -817,3 +817,7 @@ background: linear-gradient(135deg, #2b1d4a 0%, #28262e 100%);
     color: rgb(96 165 250) !important;
     padding-bottom: 0.3em;
 }
+
+/* i {
+    padding: 5px !important;
+} */

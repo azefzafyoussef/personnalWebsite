@@ -1,6 +1,6 @@
 @extends('layouts.auth')
 
-@section('title', 'Create Account - NotesHub')
+@section('title', 'Create Account - Youssef.sec')
 @section('page-title', 'Create Account')
 @section('page-subtitle', 'Join thousands of students and educators')
 
@@ -11,13 +11,13 @@
         <!-- Name -->
         <div class="form-group">
             <label for="name" class="form-label">Full Name</label>
-            <input type="text" 
-                   id="name" 
-                   name="name" 
-                   value="{{ old('name') }}" 
-                   class="form-control @error('name') error @enderror" 
+            <input type="text"
+                   id="name"
+                   name="name"
+                   value="{{ old('name') }}"
+                   class="form-control @error('name') error @enderror"
                    placeholder="Enter your full name"
-                   required 
+                   required
                    autofocus>
             @error('name')
                 <span class="form-error">{{ $message }}</span>
@@ -27,11 +27,11 @@
         <!-- Email -->
         <div class="form-group">
             <label for="email" class="form-label">Email Address</label>
-            <input type="email" 
-                   id="email" 
-                   name="email" 
-                   value="{{ old('email') }}" 
-                   class="form-control @error('email') error @enderror" 
+            <input type="email"
+                   id="email"
+                   name="email"
+                   value="{{ old('email') }}"
+                   class="form-control @error('email') error @enderror"
                    placeholder="Enter your email"
                    required>
             @error('email')
@@ -42,10 +42,10 @@
         <!-- Password -->
         <div class="form-group">
             <label for="password" class="form-label">Password</label>
-            <input type="password" 
-                   id="password" 
-                   name="password" 
-                   class="form-control @error('password') error @enderror" 
+            <input type="password"
+                   id="password"
+                   name="password"
+                   class="form-control @error('password') error @enderror"
                    placeholder="Create a password"
                    required>
             @error('password')
@@ -56,10 +56,10 @@
         <!-- Confirm Password -->
         <div class="form-group">
             <label for="password_confirmation" class="form-label">Confirm Password</label>
-            <input type="password" 
-                   id="password_confirmation" 
-                   name="password_confirmation" 
-                   class="form-control" 
+            <input type="password"
+                   id="password_confirmation"
+                   name="password_confirmation"
+                   class="form-control"
                    placeholder="Confirm your password"
                    required>
         </div>
@@ -77,7 +77,7 @@
 
         <!-- Submit Button -->
         <button type="submit" class="btn btn-primary">
-            <i class="fas fa-user-plus"></i>
+            <i class="fas p-2 fa-user-plus"></i>
             Create Account
         </button>
 
@@ -95,7 +95,7 @@
 
     <!-- Login Link -->
     <div class="auth-links">
-        Already have an account? 
+        Already have an account?
         <a href="{{ route('login') }}" class="auth-link">Sign in here</a>
     </div>
 @endsection

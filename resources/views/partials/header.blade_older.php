@@ -6,20 +6,22 @@
             <div class="flex items-center space-x-3">
                 <a href="{{ route('home') }}" class="flex items-center space-x-3">
                     <i class="fas fa-book text-2xl text-blue-600"></i>
-                    <span class="text-xl font-bold text-gray-800">NotesHub</span>
+                    <span class="text-xl font-bold text-gray-800">Youssef.sec</span>
                 </a>
             </div>
 
             <!-- Navigation -->
             <nav class="hidden md:flex space-x-8">
                 <a href="{{ route('home') }}" class="text-gray-600 hover:text-blue-600 font-medium {{ request()->routeIs('home') ? 'text-blue-600 border-b-2 border-blue-600 pb-1' : '' }}">
-                    Home
+                {{__("index.home")}}
                 </a>
                 <a href="{{ route('categories.index') }}" class="text-gray-600 hover:text-blue-600 font-medium {{ request()->routeIs('categories.*') ? 'text-blue-600 border-b-2 border-blue-600 pb-1' : '' }}">
-                    Categories
+                {{__("index.home")}}
+
                 </a>
                 <a href="{{ route('posts.index') }}" class="text-gray-600 hover:text-blue-600 font-medium {{ request()->routeIs('posts.index') ? 'text-blue-600 border-b-2 border-blue-600 pb-1' : '' }}">
-                    All Notes
+                {{__("index.home")}}
+
                 </a>
             </nav>
 
@@ -101,7 +103,7 @@
                             <div class="border-t border-gray-100 pt-2">
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
-                                    <button type="submit" class="flex items-center space-x-3 px-4 py-2 text-gray-700 hover:bg-red-50 hover:text-red-600 w-full text-left transition-colors duration-150">
+                                    <button type="submit" class="flex items-center space-x-3 px-4 py-2 text-gray-700 hover:bg-red-50 hover:text-red-600 w-full text-start transition-colors duration-150">
                                         <i class="fas fa-sign-out-alt text-gray-400 w-5"></i>
                                         <span>Logout</span>
                                     </button>
