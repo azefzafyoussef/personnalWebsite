@@ -51,8 +51,8 @@ class PostController extends Controller
                 $query->latest();
         }
 
-        $posts = $query->paginate(12);
-        $categories = Category::where('is_active', true)->get();
+        $posts = new Post();
+        $categories = new Category();
 
         return view('client.posts.index', compact('posts', 'categories', 'sort'));
     }

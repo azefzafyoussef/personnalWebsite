@@ -12,29 +12,17 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $categories = Category::where('is_active', true)
-            ->withCount('posts')
-            ->latest()
-            ->take(8)
-            ->get();
+        $categories = [];
 
-        $recentPosts = Post::where('is_published', true)
-            ->with('category', 'user')
-            ->latest()
-            ->take(6)
-            ->get();
+        $recentPosts = [];
 
-        $popularPosts = Post::where('is_published', true)
-            ->with('category', 'user')
-            ->orderBy('views', 'desc')
-            ->take(6)
-            ->get();
+        $popularPosts = [];
 
         // Stats for the homepage
-        $totalPosts = Post::where('is_published', true)->count();
-        $totalCategories = Category::where('is_active', true)->count();
-        $totalUsers = User::count();
-        $totalDownloads = Post::sum('downloads');
+        $totalPosts = 0;
+        $totalCategories = 0;
+        $totalUsers = 0;
+        $totalDownloads = 0;
 
         return view('client.home', compact(
             'categories',

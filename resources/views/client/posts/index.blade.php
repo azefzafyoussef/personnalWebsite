@@ -505,7 +505,7 @@
         <div>
             <div class="posts-header">
                 <div class="posts-count">
-                    <span>{{ $posts->total() }}</span> {{ __('index.all_notes') }}
+                    <span>1</span> {{ __('index.all_notes') }}
                 </div>
             </div>
 
@@ -520,14 +520,7 @@
                                     'My 0-Days'
                                 </span>
                                 <div class="post-stats">
-                                    <span>
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                                        {{ $post->views ?? 0 }}
-                                    </span>
-                                    <span>
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                                        {{ $post->downloads_count ?? 0 }}
-                                    </span>
+
                                 </div>
                             </div>
 
@@ -551,9 +544,9 @@
                     {{-- @endforeach --}}
                 </div>
 
-                <div class="pagination-wrap">
+                {{-- <div class="pagination-wrap">
                     {{ $posts->links() }}
-                </div>
+                </div> --}}
 
             @else
                 <div class="empty-state">
