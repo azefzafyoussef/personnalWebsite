@@ -177,7 +177,7 @@ if ($_POST['password'] == $hash) { /* login */ }
 $xml = simplexml_load_string($_POST['xml']);
 
 // Attacker sends:
-// <?xml version="1.0"?>
+// <?xml version="1.0"?&gt;
 // <!DOCTYPE foo [<!ENTITY xxe SYSTEM "file:///etc/passwd">]>
 // <root>&xxe;</root>
 

