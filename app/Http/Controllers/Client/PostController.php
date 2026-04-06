@@ -96,6 +96,59 @@ class PostController extends Controller
     //     return Storage::disk('public')->download($post->file_path);
     // }
 
+
+    // ===== 0-DAYS =====
+    public function cve()
+    {
+        return view('client.posts.cve');
+    }
+
+    // ===== PHP SECURITY ARTICLES =====
+    public function phpIntroduction()
+    {
+        return view('client.posts.php.php-introduction');
+    }
+
+    public function phpVulnerabilitiesList()
+    {
+        return view('client.posts.php.php-vulnerabilities-list');
+    }
+
+    public function phpSqli()
+    {
+        return view('client.posts.php.php-sqli');
+    }
+
+    public function phpLfiRfi()
+    {
+        return view('client.posts.php.php-lfi-rfi');
+    }
+
+    public function phpDeserialization()
+    {
+        return view('client.posts.php.php-deserialization');
+    }
+
+    public function phpTypeJuggling()
+    {
+        return view('client.posts.php.php-type-juggling');
+    }
+
+    public function phpRce()
+    {
+        return view('client.posts.php.php-rce');
+    }
+
+    public function phpXss()
+    {
+        return view('client.posts.php.php-xss');
+    }
+
+    public function phpSsrf()
+    {
+        return view('client.posts.php.php-ssrf');
+    }
+
         public function download(Post $post)
 {
     if (!$post->file_path || !Storage::disk('public')->exists($post->file_path)) {

@@ -274,10 +274,10 @@
         .hero-img-wrap {
             position: relative;
 
-             width: 515px;
-                height: 683px;
-                bottom: 3vh !important;
-                /* left: 10vh; */
+            width: 515px;
+            height: 683px;
+            bottom: 3vh !important;
+            /* left: 10vh; */
         }
 
         /* Corner brackets */
@@ -442,11 +442,16 @@
 
         /* === RESPONSIVE === */
         @media (max-width: 900px) {
+            .hero-root {
+                overflow: hidden;
+            }
+
             .hero-inner {
                 flex-direction: column-reverse;
                 padding: 60px 24px 100px;
                 text-align: center;
-                min-height: auto;
+                min-height: 100vh;
+                overflow: hidden;
             }
 
             .hero-left {
@@ -458,11 +463,16 @@
                 justify-content: center;
             }
 
+            /* THIS is the key fix — stop using fixed px dimensions */
             .hero-img-wrap {
+                width: 280px;
+                height: auto;
+                aspect-ratio: 3 / 4;
+                bottom: 0 !important;
+            }
 
-                width: 515px;
-                height: 683px;
-                bottom: 3vh !important;
+            .hero-photo {
+                height: 100%;
             }
 
             .stat-divider {
